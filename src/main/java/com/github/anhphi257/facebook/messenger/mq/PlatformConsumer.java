@@ -1,6 +1,6 @@
 package com.github.anhphi257.facebook.messenger.mq;
 
-import com.github.anhphi257.facebook.messenger.Constant;
+import com.github.anhphi257.facebook.messenger.Config;
 import com.github.anhphi257.facebook.messenger.MessageProcessor;
 import com.github.anhphi257.facebook.messenger.models.FacebookIncomeMessage;
 import com.github.anhphi257.facebook.messenger.models.FacebookOutcomeMessage;
@@ -25,8 +25,8 @@ public class PlatformConsumer implements Runnable {
     private MessageProcessor processor;
 
     static {
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, Constant.MessageQueue.KAFKA_BROKERS);
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, Constant.MessageQueue.CONSUMER.GROUP_ID);
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, Config.MessageQueue.KAFKA_BROKERS);
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, Config.MessageQueue.CONSUMER.GROUP_ID);
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
@@ -57,7 +57,7 @@ public class PlatformConsumer implements Runnable {
             FacebookIncomeMessage incomeMessage = GsonUtils.parse(json, FacebookIncomeMessage.class);
             FacebookOutcomeMessage outcomeMessage = processor.process(incomeMessage);
             try {
-                HttpRequest.sendPost(Constant.Facebook.CALLBACK_URL, GsonUtils.toJson(outcomeMessage), null);
+                HttpRequest.sendPost(Config.Facebook.CALLBACK_URL, GsonUtils.toJson(outcomeMessage), null);
             } catch (IOException e) {
                 e.printStackTrace();
             }

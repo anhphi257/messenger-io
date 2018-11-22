@@ -1,6 +1,6 @@
 package com.github.anhphi257.facebook.messenger.handler;
 
-import com.github.anhphi257.facebook.messenger.Constant;
+import com.github.anhphi257.facebook.messenger.Config;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
@@ -19,7 +19,7 @@ public class FacebookWebhookGETHandler implements Handler<RoutingContext> {
         String token = request.getParam("hub.verify_token");
         String challenge = request.getParam("hub.challenge");
         String mode = request.getParam("hub.mode");
-        if (mode.equals("subscribe") && token.equals(Constant.Facebook.VERIFY_TOKEN)) {
+        if (mode.equals("subscribe") && token.equals(Config.Webhook.VERIFY_TOKEN)) {
             response.putHeader("content-type", "application/text");
             response.putHeader("Access-Control-Allow-Origin", "*");
             response.setStatusCode(200);

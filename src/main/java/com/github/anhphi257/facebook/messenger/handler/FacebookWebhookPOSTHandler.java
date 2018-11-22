@@ -1,6 +1,6 @@
 package com.github.anhphi257.facebook.messenger.handler;
 
-import com.github.anhphi257.facebook.messenger.Constant;
+import com.github.anhphi257.facebook.messenger.Config;
 import com.github.anhphi257.facebook.messenger.models.FacebookIncomeMessage;
 import com.github.anhphi257.facebook.messenger.mq.MessageProducer;
 import com.github.anhphi257.facebook.messenger.utils.GsonUtils;
@@ -34,7 +34,7 @@ public class FacebookWebhookPOSTHandler implements Handler<RoutingContext> {
                 FacebookIncomeMessage facebookIncomeMessage = GsonUtils.parse(json, FacebookIncomeMessage.class);
                 String userId = facebookIncomeMessage.getEntries().get(0).getMessagings().get(0).getSender().getId();
                 try {
-                    producer.send(Constant.MessageQueue.TOPIC, userId, json);
+                    producer.send(Config.MessageQueue.TOPIC, userId, json);
                 } catch (ExecutionException | InterruptedException e) {
                     e.printStackTrace();
                 }

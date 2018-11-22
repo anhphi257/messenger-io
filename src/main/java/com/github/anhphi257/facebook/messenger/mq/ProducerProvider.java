@@ -1,6 +1,6 @@
 package com.github.anhphi257.facebook.messenger.mq;
 
-import com.github.anhphi257.facebook.messenger.Constant;
+import com.github.anhphi257.facebook.messenger.Config;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -17,8 +17,8 @@ public class ProducerProvider {
 
     static {
         props = new Properties();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, Constant.MessageQueue.KAFKA_BROKERS);
-        props.put(ProducerConfig.CLIENT_ID_CONFIG, Constant.MessageQueue.CLIENT_ID);
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, Config.MessageQueue.KAFKA_BROKERS);
+        props.put(ProducerConfig.CLIENT_ID_CONFIG, Config.MessageQueue.PRODUCER.CLIENT_ID);
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
     }
