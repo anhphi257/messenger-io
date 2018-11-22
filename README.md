@@ -2,6 +2,8 @@
 Gồm 2 Handler nhận các POST và GET request từ Facebook (Chung 1 route path).
 ### GET Handler 
 (com.github.anhphi257.facebook.messenger.handler.FacebookWebhookGETHandler)
+
+
 Xác minh webhook của mình với Facebook theo VERIFY_TOKEN đã đăng ký:
 - Facebook gửi bản tin với headers: hub.verify_token, hub.challenge, hub.mode
 - Nếu trường hub.verify_token chính xác phản hồi lại hub.challenge với mã 200
